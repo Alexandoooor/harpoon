@@ -1,15 +1,17 @@
 # harpoon.zsh
 
-Harpoon usage:
+## Harpoon usage
 
-Commands:
+### Commands:
+
     hook <name>         add a hook <name> for the current directory
     jump <name>         cd to the directory referenced by <name>
     unhook <name>       remove hook <name>
     hooks               list current hooks
     harpoon             print this message
 
-Example usage:
+### Example usage:
+
     cd ~/projects/myapp
     hook app
 
