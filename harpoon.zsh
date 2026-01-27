@@ -1,4 +1,4 @@
-BOOKMARK_FILE="${HOME}/.dirhooks"
+BOOKMARK_FILE="$XDG_CONFIG_HOME/.dirhooks"
 
 alias j=jump
 
