@@ -66,8 +66,13 @@ hooks() {
 }
 
 harpoon() {
-
-    echo '''
+    if [[ "$1" == "init" ]]; then
+        if [[ ! -f "${BOOKMARK_FILE}" ]]; then
+            touch "${BOOKMARK_FILE}"
+            echo "Initialized ${BOOKMARK_FILE}"
+        fi
+    else
+        cat <<'EOF'
 Harpoon usage:
 
 Commands:
@@ -76,6 +81,7 @@ Commands:
     unhook <name>       remove hook <name>
     hooks               list current hooks
     harpoon             print this message
+    harpoon init        create hook file
 
 Example usage:
     cd ~/projects/myapp
@@ -87,7 +93,9 @@ Example usage:
     hooks     # list all hooks
 
     unhook app # remove the hook
-    '''
+EOF
+        return 1
+    fi
 }
 
 _harpoon_bookmarks() {
