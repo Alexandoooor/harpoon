@@ -107,5 +107,18 @@ _harpoon_bookmarks() {
   fi
 }
 
-compdef _harpoon_bookmarks jump
-compdef _harpoon_bookmarks unhook
+_harpoon_register_completions() {
+  (( $+functions[compdef] )) || return
+  compdef _harpoon_bookmarks jump
+  compdef _harpoon_bookmarks unhook
+  add-zsh-hook -d precmd _harpoon_register_completions 2>/dev/null
+}
+
+if (( $+functions[compdef] )); then
+  # compinit already ran (e.g. a system-wide /etc/zsh/zshrc) — register now.
+  _harpoon_register_completions
+else
+  # compinit hasn't run yet; defer until after .zshrc finishes loading it.
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _harpoon_register_completions
+fi
